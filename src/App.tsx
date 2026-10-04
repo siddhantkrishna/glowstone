@@ -2,6 +2,7 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import Home from "@/pages/Home";
 import Contact from "@/pages/Contact";
 import Navigation from "@/components/Navigation";
+import Customers from "@/components/Customers";
 import Footer from "@/components/Footer";
 
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
+      <Customers />
       <Footer />
     </HashRouter>
   );
