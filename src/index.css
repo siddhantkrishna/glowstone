@@ -1919,3 +1919,49 @@ nav {
   }
 }
 
+
+/* ============================================================
+   FINAL CLEAN HERO — LARGE MACBOOK ONLY
+   ============================================================ */
+
+.glowstone-laptop {
+  --laptop-scale: min(1.85, 94vw / 620);
+
+  transform: scale(var(--laptop-scale)) !important;
+  transform-origin: center center;
+
+  position: relative !important;
+  z-index: 20 !important;
+}
+
+.glowstone-screen {
+  animation-name: glowstone-laptop-open-final !important;
+  animation-duration: 2.8s !important;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+  animation-iteration-count: 1 !important;
+  animation-direction: normal !important;
+  animation-fill-mode: forwards !important;
+}
+
+@keyframes glowstone-laptop-open-final {
+  from {
+    transform: perspective(1900px) rotateX(-88.5deg);
+  }
+
+  to {
+    transform: perspective(1900px) rotateX(0deg);
+  }
+}
+
+@media (min-width: 1400px) {
+  .glowstone-laptop {
+    --laptop-scale: 1.85;
+  }
+}
+
+@media (max-width: 700px) {
+  .glowstone-laptop {
+    --laptop-scale: 0.68;
+  }
+}
+
