@@ -1,0 +1,346 @@
+@import "tailwindcss";
+
+/* ==========================================================
+   GLOWSTONE — DESIGN TOKENS
+   ========================================================== */
+@theme {
+  --color-black: #0b0b0a;
+  --color-charcoal: #1b1a18;
+  --color-graphite: #2a2926;
+  --color-white: #fbfaf7;
+  --color-warm-white: #f1ece3;
+  --color-paper: #e9e3d8;
+  --color-grey: #8a857c;
+  --color-light-grey: #cfc9be;
+  --color-line: rgba(11, 11, 10, 0.14);
+  --color-line-inv: rgba(251, 250, 247, 0.16);
+  --color-amber: #ee9b2f;
+  --color-gold: #c9973b;
+  --color-coral: #ef6a3e;
+
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Instrument Serif", "Times New Roman", Georgia, serif;
+  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-editorial: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+:root {
+  --margin: clamp(1.25rem, 3.2vw, 3rem);
+  --gutter: clamp(0.75rem, 1.6vw, 1.5rem);
+  --nav-h: 4.5rem;
+  color-scheme: light;
+}
+
+/* ==========================================================
+   BASE
+   ========================================================== */
+@layer base {
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--color-warm-white);
+}
+body {
+  font-family: var(--font-sans);
+  background: var(--color-warm-white);
+  color: var(--color-black);
+  font-feature-settings: "ss01", "cv11";
+  overflow-x: hidden;
+}
+::selection {
+  background: var(--color-amber);
+  color: var(--color-black);
+}
+img,
+video {
+  display: block;
+  max-width: 100%;
+}
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  background: var(--color-black);
+  color: var(--color-white);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+}
+
+@layer components {
+/* ==========================================================
+   GRID — 4 / 8 / 12
+   ========================================================== */
+.wrap {
+  padding-left: var(--margin);
+  padding-right: var(--margin);
+  width: 100%;
+}
+.g {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+@media (min-width: 768px) {
+  .g {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .g {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+.rule {
+  height: 1px;
+  background: var(--color-line);
+  width: 100%;
+}
+.rule-inv {
+  height: 1px;
+  background: var(--color-line-inv);
+  width: 100%;
+}
+
+/* ==========================================================
+   TYPE SCALE
+   ========================================================== */
+.t-mega {
+  font-size: clamp(2.6rem, 11.4vw, 14rem);
+  line-height: 0.82;
+  letter-spacing: -0.06em;
+  font-weight: 500;
+}
+.t-display {
+  font-size: clamp(2.5rem, 7vw, 8.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+  font-weight: 500;
+}
+.t-h1 {
+  font-size: clamp(2.2rem, 5.6vw, 6.25rem);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  font-weight: 500;
+}
+.t-h2 {
+  font-size: clamp(1.75rem, 3.6vw, 3.75rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  font-weight: 500;
+}
+.t-h3 {
+  font-size: clamp(1.3rem, 2vw, 1.9rem);
+  line-height: 1.08;
+  letter-spacing: -0.022em;
+  font-weight: 500;
+}
+.t-lead {
+  font-size: clamp(1.2rem, 1.9vw, 1.75rem);
+  line-height: 1.28;
+  letter-spacing: -0.015em;
+  font-weight: 400;
+}
+.t-body {
+  font-size: 1.0625rem;
+  line-height: 1.58;
+  letter-spacing: -0.005em;
+}
+.t-small {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+.t-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.35;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 400;
+}
+.t-serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.t-num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* ==========================================================
+   MICRO-INTERACTIONS
+   ========================================================== */
+.u-link {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  transition: background-size 0.5s var(--ease-out-expo);
+  padding-bottom: 1px;
+}
+.u-link:hover,
+.u-link:focus-visible,
+.u-link[aria-current="page"] {
+  background-size: 100% 1px;
+  background-position: 0% 100%;
+}
+.u-link-static {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: 0% 100%;
+  transition: background-size 0.5s var(--ease-out-expo);
+  padding-bottom: 2px;
+}
+.u-link-static:hover {
+  background-size: 0% 1px;
+  background-position: 100% 100%;
+}
+
+.arrow {
+  display: inline-block;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+.group:hover .arrow-x,
+.group:focus-visible .arrow-x {
+  transform: translateX(0.35em);
+}
+.group:hover .arrow-d,
+.group:focus-visible .arrow-d {
+  transform: translateY(0.25em);
+}
+.group:hover .arrow-ne {
+  transform: translate(0.2em, -0.2em);
+}
+
+.img-zoom img,
+.img-zoom video {
+  transition: transform 1.4s var(--ease-out-expo);
+}
+.group:hover .img-zoom img,
+.group:hover .img-zoom video {
+  transform: scale(1.035);
+}
+
+/* Grain overlay for photographic surfaces */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Marquee */
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.marquee-track {
+  animation: marquee var(--marquee-speed, 40s) linear infinite;
+  will-change: transform;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Live dot */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.live-dot {
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+/* Custom cursor — desktop + fine pointer only */
+@media (hover: hover) and (pointer: fine) {
+  html.has-cursor,
+  html.has-cursor * {
+    cursor: none !important;
+  }
+  html.has-cursor input,
+  html.has-cursor textarea,
+  html.has-cursor select {
+    cursor: text !important;
+  }
+}
+
+/* Form */
+.field {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--color-line-inv);
+  padding: 0.9rem 0;
+  font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+  letter-spacing: -0.015em;
+  color: var(--color-white);
+  border-radius: 0;
+  transition: border-color 0.3s;
+}
+.field::placeholder {
+  color: rgba(251, 250, 247, 0.32);
+}
+.field:focus {
+  outline: none;
+  border-bottom-color: var(--color-amber);
+}
+.field:focus-visible {
+  outline: none;
+}
+
+/* Hide scrollbar for horizontal rails */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+}
+
+/* ==========================================================
+   REDUCED MOTION
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee-track {
+    animation: none;
+  }
+}
