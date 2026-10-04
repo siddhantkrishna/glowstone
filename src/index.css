@@ -1657,3 +1657,83 @@ video {
   }
 }
 
+
+/* ============================================================
+   HERO VISIBILITY FIX
+   ============================================================ */
+
+.glowstone-hero-light {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+
+  background:
+    radial-gradient(
+      circle at 20% 35%,
+      rgba(255, 190, 220, 0.45) 0%,
+      rgba(255, 190, 220, 0.18) 25%,
+      transparent 52%
+    ),
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(200, 180, 255, 0.42) 0%,
+      rgba(200, 180, 255, 0.16) 27%,
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 50% 80%,
+      rgba(235, 205, 255, 0.35) 0%,
+      transparent 52%
+    );
+
+  filter: blur(35px);
+
+  animation: glowstone-visible-gradient 18s ease-in-out infinite alternate !important;
+}
+
+.glowstone-hero-light::after {
+  display: none !important;
+}
+
+@keyframes glowstone-visible-gradient {
+  0% {
+    transform: translate(-8%, -4%) scale(1);
+  }
+
+  50% {
+    transform: translate(7%, 5%) scale(1.08);
+  }
+
+  100% {
+    transform: translate(-4%, 3%) scale(1.04);
+  }
+}
+
+.glowstone-laptop {
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+.glowstone-tools {
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+.glowstone-tools-label {
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+.glowstone-tools-track {
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glowstone-hero-light {
+    animation: none !important;
+  }
+}
+
