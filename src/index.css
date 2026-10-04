@@ -1965,3 +1965,28 @@ nav {
   }
 }
 
+
+/* FINAL — REALLY LARGE MACBOOK */
+
+.glowstone-clean-laptop {
+  transform: scale(2.35) !important;
+}
+
+@media (min-width: 1600px) {
+  .glowstone-clean-laptop {
+    transform: scale(2.65) !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .glowstone-clean-laptop {
+    transform: scale(2.05) !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .glowstone-clean-laptop {
+    transform: scale(0.85) !important;
+  }
+}
+
