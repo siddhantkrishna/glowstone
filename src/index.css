@@ -603,3 +603,616 @@ video {
   border-radius: 10px;
 }
 
+
+/* ============================================================
+   GLOWSTONE HERO — FINAL MACBOOK
+   ============================================================ */
+
+.glowstone-laptop {
+  --laptop-scale: min(1.55, 88vw / 620);
+
+  position: relative;
+  width: 620px;
+  height: 370px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  transform: scale(var(--laptop-scale));
+  transform-origin: center center;
+
+  isolation: isolate;
+}
+
+
+/* ============================================================
+   MACBOOK SCREEN
+   ============================================================ */
+
+.glowstone-screen {
+  position: relative;
+
+  width: 518px;
+  height: 318px;
+
+  margin: 0 auto;
+  padding: 9px 9px 23px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background: #000;
+
+  border-radius: 20px;
+
+  box-shadow:
+    inset 0 0 0 2px #c8cacb,
+    inset 0 0 0 10px #000;
+
+  transform-style: preserve-3d;
+  transform-origin: 50% 100%;
+
+  /*
+   * IMPORTANT:
+   * One animation only.
+   * No infinite.
+   * No alternate.
+   * Opens once and stays open.
+   */
+  animation-name: glowstone-macbook-open;
+  animation-duration: 2.8s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+
+  will-change: transform;
+}
+
+
+/* ============================================================
+   MACBOOK OPEN ANIMATION
+   ============================================================ */
+
+@keyframes glowstone-macbook-open {
+
+  0% {
+    transform:
+      perspective(1900px)
+      rotateX(-88.5deg);
+  }
+
+  100% {
+    transform:
+      perspective(1900px)
+      rotateX(0deg);
+  }
+
+}
+
+
+/*
+ * HARD OVERRIDE:
+ * If an older Uiverse animation is still attached somewhere,
+ * this removes the infinite behavior.
+ */
+.glowstone-screen {
+  animation-iteration-count: 1 !important;
+  animation-direction: normal !important;
+  animation-fill-mode: forwards !important;
+}
+
+
+/* ============================================================
+   SCREEN TOP / HINGE
+   ============================================================ */
+
+.glowstone-screen::before {
+  content: "";
+
+  position: absolute;
+
+  width: 518px;
+  height: 12px;
+
+  top: -3px;
+  left: 0;
+
+  background: linear-gradient(
+    #979899,
+    transparent
+  );
+
+  transform: rotateX(90deg);
+
+  border-radius: 5px;
+
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   SCREEN BOTTOM BEZEL
+   ============================================================ */
+
+.glowstone-screen::after {
+  content: "";
+
+  position: absolute;
+
+  left: 2px;
+  bottom: 2px;
+
+  width: 514px;
+  height: 24px;
+
+  background: linear-gradient(
+    to bottom,
+    #272727,
+    #0d0d0d
+  );
+
+  border-radius: 0 0 20px 20px;
+
+  pointer-events: none;
+
+  z-index: 5;
+}
+
+
+/* ============================================================
+   CAMERA / NOTCH
+   ============================================================ */
+
+.glowstone-notch {
+  position: absolute;
+
+  top: 10px;
+  left: 50%;
+
+  width: 100px;
+  height: 12px;
+
+  transform: translateX(-50%);
+
+  background: #000;
+
+  border-radius: 0 0 6px 6px;
+
+  z-index: 10;
+}
+
+
+/* ============================================================
+   VIDEO INSIDE MACBOOK
+   ============================================================ */
+
+.glowstone-screen-content {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  background: #000;
+
+  border-radius: 10px;
+
+  z-index: 2;
+}
+
+
+.glowstone-screen-video {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  background: #000;
+
+  /*
+   * Video itself continuously loops.
+   * It does NOT control the MacBook opening animation.
+   */
+}
+
+
+/* ============================================================
+   MACBOOK KEYBOARD / BASE
+   ============================================================ */
+
+.glowstone-keyboard {
+  position: relative;
+
+  width: 620px;
+  height: 24px;
+
+  margin-top: -10px;
+
+  z-index: 9;
+
+  background:
+    radial-gradient(
+      circle at center,
+      #e2e3e4 85%,
+      #a9abac 100%
+    );
+
+  border: solid #a0a3a7;
+  border-width: 1px 2px 0 2px;
+
+  border-radius: 2px 2px 12px 12px;
+
+  box-shadow:
+    inset 0 -2px 8px 0 #6c7074;
+}
+
+
+/* Trackpad */
+
+.glowstone-keyboard::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: 120px;
+  height: 10px;
+
+  margin-left: -60px;
+
+  background: #e2e3e4;
+
+  border-radius: 0 0 10px 10px;
+
+  box-shadow:
+    inset 0 0 4px 2px #babdbf;
+}
+
+
+/* Feet */
+
+.glowstone-keyboard::before {
+  content: "";
+
+  position: absolute;
+
+  bottom: -2px;
+  left: 50%;
+
+  width: 40px;
+  height: 2px;
+
+  margin-left: -10px;
+
+  background: transparent;
+
+  border-radius: 0 0 3px 3px;
+
+  box-shadow:
+    -270px 0 #272727,
+    250px 0 #272727;
+}
+
+
+/* ============================================================
+   TOOLS SECTION
+   ============================================================ */
+
+.glowstone-tools {
+  position: relative;
+
+  /*
+   * IMPORTANT:
+   * Much narrower than the previous ribbon.
+   * Matches the physical width of the MacBook base.
+   */
+  width: min(620px, 88vw);
+
+  max-width: 620px;
+
+  margin: 0 auto;
+
+  overflow: hidden;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.10);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+
+  background: transparent;
+}
+
+
+/* Soft fade on both sides */
+
+.glowstone-tools::before,
+.glowstone-tools::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  width: 60px;
+
+  z-index: 5;
+
+  pointer-events: none;
+}
+
+
+.glowstone-tools::before {
+  left: 0;
+
+  background:
+    linear-gradient(
+      to right,
+      #f5f4f1,
+      rgba(245, 244, 241, 0)
+    );
+}
+
+
+.glowstone-tools::after {
+  right: 0;
+
+  background:
+    linear-gradient(
+      to left,
+      #f5f4f1,
+      rgba(245, 244, 241, 0)
+    );
+}
+
+
+/* ============================================================
+   TOOLS TRACK
+   ============================================================ */
+
+.glowstone-tools-track {
+  display: flex;
+
+  width: max-content;
+
+  align-items: center;
+
+  gap: 34px;
+
+  padding: 13px 28px;
+
+  animation:
+    glowstone-tools-scroll
+    24s
+    linear
+    infinite;
+
+  will-change: transform;
+}
+
+
+@keyframes glowstone-tools-scroll {
+
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-33.333333%);
+  }
+
+}
+
+
+/* ============================================================
+   INDIVIDUAL TOOL
+   ============================================================ */
+
+.glowstone-tool {
+  flex: 0 0 auto;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  white-space: nowrap;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 500;
+
+  letter-spacing: -0.01em;
+
+  color: rgba(10, 10, 10, 0.62);
+}
+
+
+/* Tool circular mark */
+
+.glowstone-tool-mark {
+  width: 20px;
+  height: 20px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 20px;
+
+  border: 1px solid rgba(0, 0, 0, 0.15);
+
+  border-radius: 50%;
+
+  font-size: 9px;
+
+  font-weight: 500;
+
+  color: rgba(10, 10, 10, 0.58);
+
+  background: rgba(255, 255, 255, 0.45);
+}
+
+
+/* ============================================================
+   TOOLS LABEL
+   ============================================================ */
+
+.glowstone-tools-label {
+  margin-bottom: 18px;
+
+  text-align: center;
+
+  font-size: 9px;
+
+  line-height: 1;
+
+  font-weight: 500;
+
+  letter-spacing: 0.32em;
+
+  text-transform: uppercase;
+
+  color: rgba(10, 10, 10, 0.38);
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .glowstone-screen {
+    animation: none !important;
+
+    transform:
+      perspective(1900px)
+      rotateX(0deg) !important;
+  }
+
+  .glowstone-tools-track {
+    animation: none !important;
+
+    transform: none !important;
+  }
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+  .glowstone-laptop {
+    --laptop-scale: 0.56;
+
+    height: 220px;
+  }
+
+  .glowstone-tools {
+    width: 88vw;
+  }
+
+  .glowstone-tools-track {
+    gap: 26px;
+
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .glowstone-tools::before,
+  .glowstone-tools::after {
+    width: 40px;
+  }
+
+}
+
+
+/* ============================================================
+   LARGE DESKTOP
+   ============================================================ */
+
+@media (min-width: 1400px) {
+
+  .glowstone-laptop {
+    --laptop-scale: 1.55;
+  }
+
+}
+
+
+/* ============================================================
+   CRITICAL OVERRIDES AGAINST OLD UIVERSE CSS
+   ============================================================ */
+
+/*
+ * These prevent the old:
+ *
+ * animation: open 4s infinite alternate;
+ *
+ * from surviving if it exists earlier in index.css.
+ */
+
+.glowstone-screen {
+  animation-name: glowstone-macbook-open !important;
+  animation-duration: 2.8s !important;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+  animation-direction: normal !important;
+  animation-fill-mode: forwards !important;
+}
+
+
+/*
+ * Once the animation reaches the final frame,
+ * the laptop stays completely open.
+ */
+
+@keyframes glowstone-macbook-open {
+
+  from {
+    transform:
+      perspective(1900px)
+      rotateX(-88.5deg);
+  }
+
+  to {
+    transform:
+      perspective(1900px)
+      rotateX(0deg);
+  }
+
+}
+
