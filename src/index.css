@@ -1737,3 +1737,73 @@ video {
   }
 }
 
+
+/* ============================================================
+   FINAL VISIBILITY OVERRIDE
+   ============================================================ */
+
+.glowstone-hero-light {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+}
+
+.glowstone-laptop {
+  position: relative !important;
+  z-index: 20 !important;
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.glowstone-screen {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.glowstone-screen-content {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.glowstone-screen-video {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.glowstone-keyboard {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.glowstone-tools {
+  position: relative !important;
+  z-index: 30 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.glowstone-tools-label {
+  position: relative !important;
+  z-index: 30 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.glowstone-tools-track {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+nav {
+  z-index: 99999 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
