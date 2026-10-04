@@ -360,7 +360,7 @@ video {
    ========================================================= */
 
 .glowstone-laptop {
-  --laptop-scale: min(0.92, 78vw / 620);
+  --laptop-scale: min(1.55, 88vw / 620);
   position: relative;
   width: 620px;
   height: 370px;
