@@ -19,7 +19,17 @@ export default function Home() {
         <div className="glowstone-laptop">
           <div className="glowstone-screen">
             <div className="glowstone-notch" />
-            <div className="glowstone-screen-content" />
+            <div className="glowstone-screen-content">
+              <video
+                className="glowstone-screen-video"
+                src="/glowstone-screen.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+              />
+            </div>
           </div>
 
           <div className="glowstone-keyboard" />

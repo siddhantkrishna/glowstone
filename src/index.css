@@ -594,3 +594,12 @@ video {
     margin-top: 0;
   }
 }
+
+.glowstone-screen-video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
