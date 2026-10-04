@@ -3,7 +3,6 @@ import { HashRouter, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import Cursor from "@/components/Cursor";
 import Loader from "@/components/Loader";
 
 const Home = lazy(() => import("@/pages/Home"));
@@ -80,7 +79,6 @@ function Shell() {
           <Footer showCta={!isContact} />
         </PageTransition>
       </AnimatePresence>
-      <Cursor />
       <Loader />
     </>
   );
