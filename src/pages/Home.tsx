@@ -1,15 +1,15 @@
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-hidden bg-white">
-      <section className="glowstone-clean-hero">
+    <main className="glowstone-page">
+      <section className="glowstone-hero">
         <div className="glowstone-hero-light" />
 
-        <div className="glowstone-clean-laptop">
-          <div className="glowstone-clean-screen">
-            <div className="glowstone-clean-notch" />
+        <div className="glowstone-laptop">
+          <div className="glowstone-screen">
+            <div className="glowstone-notch" />
 
             <video
-              className="glowstone-clean-video"
+              className="glowstone-screen-video"
               src="/glowstone-screen.mp4"
               autoPlay
               loop
@@ -19,7 +19,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="glowstone-clean-keyboard" />
+          <div className="glowstone-keyboard" />
         </div>
       </section>
     </main>

@@ -1,634 +1,138 @@
 @import "tailwindcss";
 
-/* ==========================================================
-   GLOWSTONE — DESIGN TOKENS
-   ========================================================== */
-@theme {
-  --color-black: #0b0b0a;
-  --color-charcoal: #1b1a18;
-  --color-graphite: #2a2926;
-  --color-white: #fbfaf7;
-  --color-warm-white: #f1ece3;
-  --color-paper: #e9e3d8;
-  --color-grey: #8a857c;
-  --color-light-grey: #cfc9be;
-  --color-line: rgba(11, 11, 10, 0.14);
-  --color-line-inv: rgba(251, 250, 247, 0.16);
-  --color-amber: #ee9b2f;
-  --color-gold: #c9973b;
-  --color-coral: #ef6a3e;
-
-  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
-  --font-serif: "Instrument Serif", "Times New Roman", Georgia, serif;
-  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-editorial: cubic-bezier(0.65, 0, 0.35, 1);
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-:root {
-  --margin: clamp(1.25rem, 3.2vw, 3rem);
-  --gutter: clamp(0.75rem, 1.6vw, 1.5rem);
-  --nav-h: 4.5rem;
-  color-scheme: light;
-}
-
-/* ==========================================================
-   BASE
-   ========================================================== */
-@layer base {
-html {
-  -webkit-text-size-adjust: 100%;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: var(--color-warm-white);
-}
 body {
-  font-family: var(--font-sans);
-  background: var(--color-warm-white);
-  color: var(--color-black);
-  font-feature-settings: "ss01", "cv11";
   overflow-x: hidden;
-}
-::selection {
-  background: var(--color-amber);
-  color: var(--color-black);
-}
-img,
-video {
-  display: block;
-  max-width: 100%;
-}
-:focus-visible {
-  outline: 2px solid var(--color-amber);
-  outline-offset: 3px;
-  border-radius: 1px;
-}
-.skip-link {
-  position: fixed;
-  left: 1rem;
-  top: -4rem;
-  z-index: 100;
-  background: var(--color-black);
-  color: var(--color-white);
-  padding: 0.75rem 1rem;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  transition: top 0.2s;
-}
-.skip-link:focus {
-  top: 1rem;
-}
+  background: #fff;
 }
 
-@layer components {
-/* ==========================================================
-   GRID — 4 / 8 / 12
-   ========================================================== */
-.wrap {
-  padding-left: var(--margin);
-  padding-right: var(--margin);
+* {
+  box-sizing: border-box;
+}
+
+
+/* ============================================================
+   GLOWSTONE HERO
+   ============================================================ */
+
+.glowstone-page {
   width: 100%;
-}
-.g {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  column-gap: var(--gutter);
-}
-@media (min-width: 768px) {
-  .g {
-    grid-template-columns: repeat(8, minmax(0, 1fr));
-  }
-}
-@media (min-width: 1024px) {
-  .g {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-  }
-}
-.rule {
-  height: 1px;
-  background: var(--color-line);
-  width: 100%;
-}
-.rule-inv {
-  height: 1px;
-  background: var(--color-line-inv);
-  width: 100%;
+  min-height: 100vh;
+  background: #fff;
 }
 
-/* ==========================================================
-   TYPE SCALE
-   ========================================================== */
-.t-mega {
-  font-size: clamp(2.6rem, 11.4vw, 14rem);
-  line-height: 0.82;
-  letter-spacing: -0.06em;
-  font-weight: 500;
-}
-.t-display {
-  font-size: clamp(2.5rem, 7vw, 8.5rem);
-  line-height: 0.88;
-  letter-spacing: -0.05em;
-  font-weight: 500;
-}
-.t-h1 {
-  font-size: clamp(2.2rem, 5.6vw, 6.25rem);
-  line-height: 0.92;
-  letter-spacing: -0.045em;
-  font-weight: 500;
-}
-.t-h2 {
-  font-size: clamp(1.75rem, 3.6vw, 3.75rem);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
-  font-weight: 500;
-}
-.t-h3 {
-  font-size: clamp(1.3rem, 2vw, 1.9rem);
-  line-height: 1.08;
-  letter-spacing: -0.022em;
-  font-weight: 500;
-}
-.t-lead {
-  font-size: clamp(1.2rem, 1.9vw, 1.75rem);
-  line-height: 1.28;
-  letter-spacing: -0.015em;
-  font-weight: 400;
-}
-.t-body {
-  font-size: 1.0625rem;
-  line-height: 1.58;
-  letter-spacing: -0.005em;
-}
-.t-small {
-  font-size: 0.9375rem;
-  line-height: 1.5;
-}
-.t-label {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  line-height: 1.35;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 400;
-}
-.t-serif {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  letter-spacing: -0.01em;
-}
-.t-num {
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum";
-}
-
-/* ==========================================================
-   MICRO-INTERACTIONS
-   ========================================================== */
-.u-link {
-  background-image: linear-gradient(currentColor, currentColor);
-  background-size: 0% 1px;
-  background-repeat: no-repeat;
-  background-position: 100% 100%;
-  transition: background-size 0.5s var(--ease-out-expo);
-  padding-bottom: 1px;
-}
-.u-link:hover,
-.u-link:focus-visible,
-.u-link[aria-current="page"] {
-  background-size: 100% 1px;
-  background-position: 0% 100%;
-}
-.u-link-static {
-  background-image: linear-gradient(currentColor, currentColor);
-  background-size: 100% 1px;
-  background-repeat: no-repeat;
-  background-position: 0% 100%;
-  transition: background-size 0.5s var(--ease-out-expo);
-  padding-bottom: 2px;
-}
-.u-link-static:hover {
-  background-size: 0% 1px;
-  background-position: 100% 100%;
-}
-
-.arrow {
-  display: inline-block;
-  transition: transform 0.5s var(--ease-out-expo);
-}
-.group:hover .arrow-x,
-.group:focus-visible .arrow-x {
-  transform: translateX(0.35em);
-}
-.group:hover .arrow-d,
-.group:focus-visible .arrow-d {
-  transform: translateY(0.25em);
-}
-.group:hover .arrow-ne {
-  transform: translate(0.2em, -0.2em);
-}
-
-.img-zoom img,
-.img-zoom video {
-  transition: transform 1.4s var(--ease-out-expo);
-}
-.group:hover .img-zoom img,
-.group:hover .img-zoom video {
-  transform: scale(1.035);
-}
-
-/* Grain overlay for photographic surfaces */
-.grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.12;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* Marquee */
-@keyframes marquee {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-.marquee-track {
-  animation: marquee var(--marquee-speed, 40s) linear infinite;
-  will-change: transform;
-}
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
-}
-
-/* Live dot */
-@keyframes pulse-dot {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.35;
-  }
-}
-.live-dot {
-  animation: pulse-dot 2.4s ease-in-out infinite;
-}
-
-
-/* Form */
-.field {
-  width: 100%;
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid var(--color-line-inv);
-  padding: 0.9rem 0;
-  font-size: clamp(1.15rem, 1.6vw, 1.5rem);
-  letter-spacing: -0.015em;
-  color: var(--color-white);
-  border-radius: 0;
-  transition: border-color 0.3s;
-}
-.field::placeholder {
-  color: rgba(251, 250, 247, 0.32);
-}
-.field:focus {
-  outline: none;
-  border-bottom-color: var(--color-amber);
-}
-.field:focus-visible {
-  outline: none;
-}
-
-/* Hide scrollbar for horizontal rails */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  scrollbar-width: none;
-}
-}
-
-/* ==========================================================
-   REDUCED MOTION
-   ========================================================== */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-  .marquee-track {
-    animation: none;
-  }
-}
-
-/* Glowstone tools ribbon */
-@keyframes glowstone-tools-marquee {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-33.333333%);
-  }
-}
-
-.tools-marquee {
-  animation: glowstone-tools-marquee 32s linear infinite;
-  will-change: transform;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .tools-marquee {
-    animation: none;
-  }
-}
-
-/* =========================================================
-   Glowstone — Uiverse-inspired 3D Laptop
-   ========================================================= */
-
-.glowstone-laptop {
-  --laptop-scale: min(1.55, 88vw / 620);
+.glowstone-hero {
   position: relative;
-  width: 620px;
-  height: 370px;
-  transform: scale(var(--laptop-scale));
-  transform-origin: center center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
-/* Screen */
+  width: 100vw;
+  height: 100vh;
+  min-height: 720px;
 
-.glowstone-screen {
-  border-radius: 20px;
-  box-shadow:
-    inset 0 0 0 2px #c8cacb,
-    inset 0 0 0 10px #000;
-  height: 318px;
-  width: 518px;
-  margin: 0 auto;
-  padding: 9px 9px 23px 9px;
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
-  transform-style: preserve-3d;
-  transform: perspective(1900px) rotateX(-88.5deg);
-  transform-origin: 50% 100%;
-  animation: glowstone-laptop-open 4s infinite alternate;
-}
 
-@keyframes glowstone-laptop-open {
-  0% {
-    transform: perspective(1900px) rotateX(-88.5deg);
-  }
-
-  100% {
-    transform: perspective(1000px) rotateX(0deg);
-  }
-}
-
-.glowstone-screen::before {
-  content: "";
-  width: 518px;
-  height: 12px;
-  position: absolute;
-  background: linear-gradient(#979899, transparent);
-  top: -3px;
-  transform: rotateX(90deg);
-  border-radius: 5px;
-}
-
-.glowstone-screen::after {
-  background: linear-gradient(to bottom, #272727, #0d0d0d);
-  border-radius: 0 0 20px 20px;
-  bottom: 2px;
-  content: "";
-  height: 24px;
-  left: 2px;
-  position: absolute;
-  width: 514px;
-}
-
-.glowstone-notch {
-  width: 100px;
-  height: 12px;
-  position: absolute;
-  background: #000;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 0 0 6px 6px;
-  z-index: 5;
-}
-
-.glowstone-screen-content {
-  position: absolute;
-  inset: 10px;
-  border-radius: 12px;
-  background: #fff;
-  z-index: 1;
-}
-
-/* Keyboard */
-
-.glowstone-keyboard {
-  background: radial-gradient(
-    circle at center,
-    #e2e3e4 85%,
-    #a9abac 100%
-  );
-  border: solid #a0a3a7;
-  border-radius: 2px 2px 12px 12px;
-  border-width: 1px 2px 0 2px;
-  box-shadow: inset 0 -2px 8px 0 #6c7074;
-  height: 24px;
-  margin-top: -10px;
-  position: relative;
-  width: 620px;
-  z-index: 9;
-}
-
-.glowstone-keyboard::after {
-  background: #e2e3e4;
-  border-radius: 0 0 10px 10px;
-  box-shadow: inset 0 0 4px 2px #babdbf;
-  content: "";
-  height: 10px;
-  left: 50%;
-  margin-left: -60px;
-  position: absolute;
-  top: 0;
-  width: 120px;
-}
-
-.glowstone-keyboard::before {
-  background: transparent;
-  border-radius: 0 0 3px 3px;
-  bottom: -2px;
-  box-shadow:
-    -270px 0 #272727,
-    250px 0 #272727;
-  content: "";
-  height: 2px;
-  left: 50%;
-  margin-left: -10px;
-  position: absolute;
-  width: 40px;
-}
-
-/* Tools ribbon */
-
-.glowstone-tools {
-  position: relative;
   overflow: hidden;
-  width: 100%;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 17px 0;
-}
 
-.glowstone-tools::before,
-.glowstone-tools::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100px;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.glowstone-tools::before {
-  left: 0;
-  background: linear-gradient(
-    to right,
-    #f5f4f1,
-    transparent
-  );
-}
-
-.glowstone-tools::after {
-  right: 0;
-  background: linear-gradient(
-    to left,
-    #f5f4f1,
-    transparent
-  );
-}
-
-.glowstone-tools-track {
-  display: flex;
-  width: max-content;
-  animation: glowstone-tools-scroll 32s linear infinite;
-}
-
-@keyframes glowstone-tools-scroll {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-33.333333%);
-  }
-}
-
-.glowstone-tool {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 0 28px;
-  white-space: nowrap;
-  color: rgba(0, 0, 0, 0.58);
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.glowstone-tool-mark {
-  display: flex;
-  width: 24px;
-  height: 24px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 50%;
-  font-size: 10px;
-  font-weight: 600;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .glowstone-screen {
-    animation: none;
-    transform: perspective(1000px) rotateX(0deg);
-  }
-
-  .glowstone-tools-track {
-    animation: none;
-  }
-}
-
-@media (max-width: 700px) {
-  .glowstone-laptop {
-    transform: scale(0.56);
-    height: 245px;
-    margin-top: -40px;
-    margin-bottom: -40px;
-  }
-
-  .glowstone-tools {
-    margin-top: 0;
-  }
-}
-
-.glowstone-screen-video {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  border-radius: 10px;
+  background: #fff;
 }
 
 
 /* ============================================================
-   GLOWSTONE HERO — FINAL MACBOOK
+   SOFT MOVING LIGHT
+   ============================================================ */
+
+.glowstone-hero-light {
+  position: absolute;
+  inset: -30%;
+
+  z-index: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 25% 35%,
+      rgba(255, 190, 220, 0.45) 0%,
+      rgba(255, 190, 220, 0.16) 28%,
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 75% 30%,
+      rgba(205, 185, 255, 0.42) 0%,
+      rgba(205, 185, 255, 0.15) 28%,
+      transparent 56%
+    ),
+    radial-gradient(
+      circle at 50% 80%,
+      rgba(238, 215, 255, 0.35) 0%,
+      transparent 55%
+    );
+
+  filter: blur(55px);
+
+  animation:
+    glowstone-light-move
+    18s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+@keyframes glowstone-light-move {
+  0% {
+    transform: translate3d(-5%, -3%, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(5%, 4%, 0) scale(1.08);
+  }
+
+  100% {
+    transform: translate3d(-3%, 2%, 0) scale(1.04);
+  }
+}
+
+
+/* ============================================================
+   LAPTOP
    ============================================================ */
 
 .glowstone-laptop {
-  --laptop-scale: min(1.55, 88vw / 620);
-
   position: relative;
+
+  z-index: 10;
+
   width: 620px;
   height: 370px;
-  margin: 0 auto;
+
+  flex: 0 0 620px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  transform: scale(var(--laptop-scale));
-  transform-origin: center center;
+  margin: 0;
+  padding: 0;
 
-  isolation: isolate;
+  transform:
+    translate3d(0, 0, 0)
+    scale(1.8);
+
+  transform-origin: center center;
 }
 
 
 /* ============================================================
-   MACBOOK SCREEN
+   SCREEN
    ============================================================ */
 
 .glowstone-screen {
@@ -637,7 +141,8 @@ video {
   width: 518px;
   height: 318px;
 
-  margin: 0 auto;
+  flex: 0 0 318px;
+
   padding: 9px 9px 23px;
 
   display: flex;
@@ -657,30 +162,16 @@ video {
   transform-style: preserve-3d;
   transform-origin: 50% 100%;
 
-  /*
-   * IMPORTANT:
-   * One animation only.
-   * No infinite.
-   * No alternate.
-   * Opens once and stays open.
-   */
-  animation-name: glowstone-macbook-open;
-  animation-duration: 2.8s;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  animation-iteration-count: 1;
-  animation-direction: normal;
-  animation-fill-mode: forwards;
-
-  will-change: transform;
+  animation:
+    glowstone-open
+    2.8s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    1
+    normal
+    forwards;
 }
 
-
-/* ============================================================
-   MACBOOK OPEN ANIMATION
-   ============================================================ */
-
-@keyframes glowstone-macbook-open {
-
+@keyframes glowstone-open {
   0% {
     transform:
       perspective(1900px)
@@ -692,81 +183,37 @@ video {
       perspective(1900px)
       rotateX(0deg);
   }
-
-}
-
-
-/*
- * HARD OVERRIDE:
- * If an older Uiverse animation is still attached somewhere,
- * this removes the infinite behavior.
- */
-.glowstone-screen {
-  animation-iteration-count: 1 !important;
-  animation-direction: normal !important;
-  animation-fill-mode: forwards !important;
 }
 
 
 /* ============================================================
-   SCREEN TOP / HINGE
+   VIDEO
    ============================================================ */
 
-.glowstone-screen::before {
-  content: "";
-
+.glowstone-screen-video {
   position: absolute;
 
-  width: 518px;
-  height: 12px;
+  top: 9px;
+  left: 9px;
 
-  top: -3px;
-  left: 0;
+  width: 500px;
+  height: 286px;
 
-  background: linear-gradient(
-    #979899,
-    transparent
-  );
+  display: block;
 
-  transform: rotateX(90deg);
+  object-fit: cover;
 
-  border-radius: 5px;
+  background: #000;
 
-  pointer-events: none;
+  border: 0;
+  border-radius: 10px;
+
+  z-index: 2;
 }
 
 
 /* ============================================================
-   SCREEN BOTTOM BEZEL
-   ============================================================ */
-
-.glowstone-screen::after {
-  content: "";
-
-  position: absolute;
-
-  left: 2px;
-  bottom: 2px;
-
-  width: 514px;
-  height: 24px;
-
-  background: linear-gradient(
-    to bottom,
-    #272727,
-    #0d0d0d
-  );
-
-  border-radius: 0 0 20px 20px;
-
-  pointer-events: none;
-
-  z-index: 5;
-}
-
-
-/* ============================================================
-   CAMERA / NOTCH
+   CAMERA NOTCH
    ============================================================ */
 
 .glowstone-notch {
@@ -789,52 +236,37 @@ video {
 
 
 /* ============================================================
-   VIDEO INSIDE MACBOOK
+   SCREEN BOTTOM BEZEL
    ============================================================ */
 
-.glowstone-screen-content {
-  position: relative;
+.glowstone-screen::after {
+  content: "";
 
-  width: 100%;
-  height: 100%;
-
-  overflow: hidden;
-
-  background: #000;
-
-  border-radius: 10px;
-
-  z-index: 2;
-}
-
-
-.glowstone-screen-video {
   position: absolute;
 
-  inset: 0;
+  left: 2px;
+  bottom: 2px;
 
-  width: 100%;
-  height: 100%;
+  width: 514px;
+  height: 24px;
 
-  display: block;
+  background:
+    linear-gradient(
+      to bottom,
+      #272727,
+      #0d0d0d
+    );
 
-  object-fit: cover;
+  border-radius: 0 0 20px 20px;
 
-  border: 0;
+  z-index: 5;
 
-  border-radius: 10px;
-
-  background: #000;
-
-  /*
-   * Video itself continuously loops.
-   * It does NOT control the MacBook opening animation.
-   */
+  pointer-events: none;
 }
 
 
 /* ============================================================
-   MACBOOK KEYBOARD / BASE
+   KEYBOARD
    ============================================================ */
 
 .glowstone-keyboard {
@@ -843,9 +275,11 @@ video {
   width: 620px;
   height: 24px;
 
+  flex: 0 0 24px;
+
   margin-top: -10px;
 
-  z-index: 9;
+  z-index: 20;
 
   background:
     radial-gradient(
@@ -862,9 +296,6 @@ video {
   box-shadow:
     inset 0 -2px 8px 0 #6c7074;
 }
-
-
-/* Trackpad */
 
 .glowstone-keyboard::after {
   content: "";
@@ -887,9 +318,6 @@ video {
     inset 0 0 4px 2px #babdbf;
 }
 
-
-/* Feet */
-
 .glowstone-keyboard::before {
   content: "";
 
@@ -905,8 +333,6 @@ video {
 
   background: transparent;
 
-  border-radius: 0 0 3px 3px;
-
   box-shadow:
     -270px 0 #272727,
     250px 0 #272727;
@@ -914,1141 +340,47 @@ video {
 
 
 /* ============================================================
-   TOOLS SECTION
+   RESPONSIVE
    ============================================================ */
 
-.glowstone-tools {
-  position: relative;
-
-  /*
-   * IMPORTANT:
-   * Much narrower than the previous ribbon.
-   * Matches the physical width of the MacBook base.
-   */
-  width: min(620px, 88vw);
-
-  max-width: 620px;
-
-  margin: 0 auto;
-
-  overflow: hidden;
-
-  border-top: 1px solid rgba(0, 0, 0, 0.10);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.10);
-
-  background: transparent;
-}
-
-
-/* Soft fade on both sides */
-
-.glowstone-tools::before,
-.glowstone-tools::after {
-  content: "";
-
-  position: absolute;
-
-  top: 0;
-  bottom: 0;
-
-  width: 60px;
-
-  z-index: 5;
-
-  pointer-events: none;
-}
-
-
-.glowstone-tools::before {
-  left: 0;
-
-  background:
-    linear-gradient(
-      to right,
-      #f5f4f1,
-      rgba(245, 244, 241, 0)
-    );
-}
-
-
-.glowstone-tools::after {
-  right: 0;
-
-  background:
-    linear-gradient(
-      to left,
-      #f5f4f1,
-      rgba(245, 244, 241, 0)
-    );
-}
-
-
-/* ============================================================
-   TOOLS TRACK
-   ============================================================ */
-
-.glowstone-tools-track {
-  display: flex;
-
-  width: max-content;
-
-  align-items: center;
-
-  gap: 34px;
-
-  padding: 13px 28px;
-
-  animation:
-    glowstone-tools-scroll
-    24s
-    linear
-    infinite;
-
-  will-change: transform;
-}
-
-
-@keyframes glowstone-tools-scroll {
-
-  from {
-    transform: translateX(0);
+@media (min-width: 1700px) {
+  .glowstone-laptop {
+    transform: scale(2.05);
   }
+}
 
-  to {
-    transform: translateX(-33.333333%);
+@media (max-width: 1300px) {
+  .glowstone-laptop {
+    transform: scale(1.55);
   }
-
 }
 
-
-/* ============================================================
-   INDIVIDUAL TOOL
-   ============================================================ */
-
-.glowstone-tool {
-  flex: 0 0 auto;
-
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 9px;
-
-  white-space: nowrap;
-
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Helvetica,
-    Arial,
-    sans-serif;
-
-  font-size: 11px;
-
-  font-weight: 500;
-
-  letter-spacing: -0.01em;
-
-  color: rgba(10, 10, 10, 0.62);
-}
-
-
-/* Tool circular mark */
-
-.glowstone-tool-mark {
-  width: 20px;
-  height: 20px;
-
-  display: inline-flex;
-
-  align-items: center;
-  justify-content: center;
-
-  flex: 0 0 20px;
-
-  border: 1px solid rgba(0, 0, 0, 0.15);
-
-  border-radius: 50%;
-
-  font-size: 9px;
-
-  font-weight: 500;
-
-  color: rgba(10, 10, 10, 0.58);
-
-  background: rgba(255, 255, 255, 0.45);
-}
-
-
-/* ============================================================
-   TOOLS LABEL
-   ============================================================ */
-
-.glowstone-tools-label {
-  margin-bottom: 18px;
-
-  text-align: center;
-
-  font-size: 9px;
-
-  line-height: 1;
-
-  font-weight: 500;
-
-  letter-spacing: 0.32em;
-
-  text-transform: uppercase;
-
-  color: rgba(10, 10, 10, 0.38);
-}
-
-
-/* ============================================================
-   REDUCED MOTION
-   ============================================================ */
-
-@media (prefers-reduced-motion: reduce) {
-
-  .glowstone-screen {
-    animation: none !important;
-
-    transform:
-      perspective(1900px)
-      rotateX(0deg) !important;
+@media (max-width: 1000px) {
+  .glowstone-laptop {
+    transform: scale(1.25);
   }
-
-  .glowstone-tools-track {
-    animation: none !important;
-
-    transform: none !important;
-  }
-
 }
-
-
-/* ============================================================
-   MOBILE
-   ============================================================ */
 
 @media (max-width: 700px) {
+  .glowstone-hero {
+    min-height: 600px;
+  }
 
   .glowstone-laptop {
-    --laptop-scale: 0.56;
-
-    height: 220px;
+    transform: scale(0.78);
   }
-
-  .glowstone-tools {
-    width: 88vw;
-  }
-
-  .glowstone-tools-track {
-    gap: 26px;
-
-    padding-left: 22px;
-    padding-right: 22px;
-  }
-
-  .glowstone-tools::before,
-  .glowstone-tools::after {
-    width: 40px;
-  }
-
 }
 
-
-/* ============================================================
-   LARGE DESKTOP
-   ============================================================ */
-
-@media (min-width: 1400px) {
-
-  .glowstone-laptop {
-    --laptop-scale: 1.55;
+@media (prefers-reduced-motion: reduce) {
+  .glowstone-hero-light {
+    animation: none;
   }
 
-}
+  .glowstone-screen {
+    animation: none;
 
-
-/* ============================================================
-   CRITICAL OVERRIDES AGAINST OLD UIVERSE CSS
-   ============================================================ */
-
-/*
- * These prevent the old:
- *
- * animation: open 4s infinite alternate;
- *
- * from surviving if it exists earlier in index.css.
- */
-
-.glowstone-screen {
-  animation-name: glowstone-macbook-open !important;
-  animation-duration: 2.8s !important;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
-  animation-delay: 0s !important;
-  animation-iteration-count: 1 !important;
-  animation-direction: normal !important;
-  animation-fill-mode: forwards !important;
-}
-
-
-/*
- * Once the animation reaches the final frame,
- * the laptop stays completely open.
- */
-
-@keyframes glowstone-macbook-open {
-
-  from {
-    transform:
-      perspective(1900px)
-      rotateX(-88.5deg);
-  }
-
-  to {
     transform:
       perspective(1900px)
       rotateX(0deg);
   }
-
 }
-
-
-/* ============================================================
-   GLOWSTONE TOOLS RIBBON — LARGE / COLOURED
-   ============================================================ */
-
-.glowstone-tools {
-  width: min(760px, 88vw);
-  max-width: 760px;
-
-  margin: 0 auto;
-
-  overflow: hidden;
-
-  border-top: 1px solid rgba(0, 0, 0, 0.13);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.13);
-
-  background: rgba(255, 255, 255, 0.28);
-}
-
-.glowstone-tools-label {
-  margin-bottom: 20px;
-
-  font-size: 10px;
-  letter-spacing: 0.34em;
-
-  color: rgba(10, 10, 10, 0.42);
-}
-
-.glowstone-tools-track {
-  display: flex;
-  align-items: center;
-
-  width: max-content;
-
-  gap: 46px;
-
-  padding: 18px 34px;
-
-  animation:
-    glowstone-tools-scroll
-    24s
-    linear
-    infinite;
-
-  will-change: transform;
-}
-
-.glowstone-tool {
-  flex: 0 0 auto;
-
-  display: inline-flex;
-  align-items: center;
-
-  gap: 11px;
-
-  white-space: nowrap;
-
-  font-size: 13px;
-  font-weight: 500;
-
-  letter-spacing: -0.01em;
-
-  transition:
-    opacity 180ms ease,
-    transform 180ms ease;
-}
-
-.glowstone-tool-mark {
-  width: 28px;
-  height: 28px;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  flex: 0 0 28px;
-
-  border: 1px solid currentColor;
-
-  border-radius: 50%;
-
-  font-size: 10px;
-  font-weight: 600;
-
-  background: rgba(255, 255, 255, 0.72);
-
-  transition:
-    background 180ms ease,
-    color 180ms ease,
-    transform 180ms ease;
-}
-
-
-/* Claude / Anthropic */
-
-.glowstone-tool-claude {
-  color: #d97757;
-}
-
-.glowstone-tool-claude .glowstone-tool-mark {
-  background: rgba(217, 119, 87, 0.10);
-}
-
-
-/* Vercel */
-
-.glowstone-tool-vercel {
-  color: #111111;
-}
-
-.glowstone-tool-vercel .glowstone-tool-mark {
-  background: #111111;
-  color: #ffffff;
-  border-color: #111111;
-}
-
-
-/* Framer */
-
-.glowstone-tool-framer {
-  color: #8b5cf6;
-}
-
-.glowstone-tool-framer .glowstone-tool-mark {
-  background: rgba(139, 92, 246, 0.10);
-}
-
-
-/* Lovable */
-
-.glowstone-tool-lovable {
-  color: #e11d8d;
-}
-
-.glowstone-tool-lovable .glowstone-tool-mark {
-  background: rgba(225, 29, 141, 0.10);
-}
-
-
-/* Supabase */
-
-.glowstone-tool-supabase {
-  color: #3ecf8e;
-}
-
-.glowstone-tool-supabase .glowstone-tool-mark {
-  background: rgba(62, 207, 142, 0.11);
-}
-
-
-/* Cursor */
-
-.glowstone-tool-cursor {
-  color: #555555;
-}
-
-.glowstone-tool-cursor .glowstone-tool-mark {
-  background: rgba(85, 85, 85, 0.08);
-}
-
-
-/* OpenAI */
-
-.glowstone-tool-openai {
-  color: #111111;
-}
-
-.glowstone-tool-openai .glowstone-tool-mark {
-  background: rgba(16, 163, 127, 0.12);
-  border-color: #10a37f;
-}
-
-
-/* Google */
-
-.glowstone-tool-google {
-  color: #4285f4;
-}
-
-.glowstone-tool-google .glowstone-tool-mark {
-  background:
-    linear-gradient(
-      135deg,
-      rgba(66, 133, 244, 0.12),
-      rgba(52, 168, 83, 0.12)
-    );
-}
-
-
-/* Antigravity */
-
-.glowstone-tool-antigravity {
-  color: #6d5dfc;
-}
-
-.glowstone-tool-antigravity .glowstone-tool-mark {
-  background: rgba(109, 93, 252, 0.10);
-}
-
-
-/* Side fades */
-
-.glowstone-tools::before,
-.glowstone-tools::after {
-  width: 80px;
-}
-
-.glowstone-tools::before {
-  background:
-    linear-gradient(
-      to right,
-      #f5f4f1,
-      rgba(245, 244, 241, 0)
-    );
-}
-
-.glowstone-tools::after {
-  background:
-    linear-gradient(
-      to left,
-      #f5f4f1,
-      rgba(245, 244, 241, 0)
-    );
-}
-
-
-/* Hover */
-
-.glowstone-tool:hover {
-  opacity: 1;
-  transform: translateY(-1px);
-}
-
-.glowstone-tool:hover .glowstone-tool-mark {
-  transform: scale(1.08);
-}
-
-
-/* Mobile */
-
-@media (max-width: 700px) {
-
-  .glowstone-tools {
-    width: 88vw;
-  }
-
-  .glowstone-tools-track {
-    gap: 30px;
-    padding: 15px 26px;
-  }
-
-  .glowstone-tool {
-    font-size: 11px;
-  }
-
-  .glowstone-tool-mark {
-    width: 24px;
-    height: 24px;
-    flex-basis: 24px;
-  }
-
-}
-
-
-/* ============================================================
-   GLOWSTONE — MOVING BABY PINK / PURPLE HERO LIGHT
-   ============================================================ */
-
-.glowstone-hero-light {
-  position: absolute;
-  inset: -20% -15%;
-
-  z-index: -1;
-
-  pointer-events: none;
-
-  background:
-    radial-gradient(
-      ellipse at 20% 35%,
-      rgba(255, 214, 232, 0.72) 0%,
-      rgba(255, 214, 232, 0.32) 22%,
-      transparent 52%
-    ),
-    radial-gradient(
-      ellipse at 78% 30%,
-      rgba(220, 205, 255, 0.68) 0%,
-      rgba(220, 205, 255, 0.30) 24%,
-      transparent 54%
-    ),
-    radial-gradient(
-      ellipse at 52% 78%,
-      rgba(239, 218, 255, 0.58) 0%,
-      rgba(239, 218, 255, 0.24) 25%,
-      transparent 55%
-    );
-
-  filter: blur(45px);
-
-  transform: translate3d(0, 0, 0);
-
-  animation: glowstone-hero-gradient 18s ease-in-out infinite alternate;
-
-  will-change: transform;
-}
-
-
-@keyframes glowstone-hero-gradient {
-
-  0% {
-    transform:
-      translate3d(-5%, -2%, 0)
-      scale(1);
-  }
-
-  25% {
-    transform:
-      translate3d(3%, 4%, 0)
-      scale(1.06);
-  }
-
-  50% {
-    transform:
-      translate3d(7%, -3%, 0)
-      scale(1.1);
-  }
-
-  75% {
-    transform:
-      translate3d(-3%, 5%, 0)
-      scale(1.05);
-  }
-
-  100% {
-    transform:
-      translate3d(-7%, -4%, 0)
-      scale(1);
-  }
-
-}
-
-
-/* Soft white veil keeps the gradient premium and subtle */
-
-.glowstone-hero-light::after {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  background:
-    radial-gradient(
-      ellipse at center,
-      rgba(255, 255, 255, 0.18),
-      rgba(255, 255, 255, 0.72) 72%
-    );
-
-  pointer-events: none;
-}
-
-
-/* Reduced motion */
-
-@media (prefers-reduced-motion: reduce) {
-  .glowstone-hero-light {
-    animation: none;
-  }
-}
-
-
-.glowstone-hero-light {
-  position: absolute;
-  inset: -25% -15%;
-  z-index: -1;
-  pointer-events: none;
-
-  background:
-    radial-gradient(
-      ellipse at 20% 35%,
-      rgba(255, 214, 232, 0.72) 0%,
-      rgba(255, 214, 232, 0.30) 25%,
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse at 78% 30%,
-      rgba(220, 205, 255, 0.68) 0%,
-      rgba(220, 205, 255, 0.28) 25%,
-      transparent 56%
-    ),
-    radial-gradient(
-      ellipse at 52% 78%,
-      rgba(239, 218, 255, 0.58) 0%,
-      rgba(239, 218, 255, 0.22) 25%,
-      transparent 56%
-    );
-
-  filter: blur(50px);
-  animation: glowstone-hero-gradient 18s ease-in-out infinite alternate;
-  will-change: transform;
-}
-
-@keyframes glowstone-hero-gradient {
-  0% {
-    transform: translate3d(-5%, -2%, 0) scale(1);
-  }
-
-  25% {
-    transform: translate3d(3%, 4%, 0) scale(1.06);
-  }
-
-  50% {
-    transform: translate3d(7%, -3%, 0) scale(1.1);
-  }
-
-  75% {
-    transform: translate3d(-3%, 5%, 0) scale(1.05);
-  }
-
-  100% {
-    transform: translate3d(-7%, -4%, 0) scale(1);
-  }
-}
-
-.glowstone-hero-light::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  background:
-    radial-gradient(
-      ellipse at center,
-      rgba(255, 255, 255, 0.10),
-      rgba(255, 255, 255, 0.70) 75%
-    );
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .glowstone-hero-light {
-    animation: none;
-  }
-}
-
-
-/* ============================================================
-   HERO VISIBILITY FIX
-   ============================================================ */
-
-.glowstone-hero-light {
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 0 !important;
-  pointer-events: none !important;
-  overflow: hidden !important;
-
-  background:
-    radial-gradient(
-      circle at 20% 35%,
-      rgba(255, 190, 220, 0.45) 0%,
-      rgba(255, 190, 220, 0.18) 25%,
-      transparent 52%
-    ),
-    radial-gradient(
-      circle at 80% 30%,
-      rgba(200, 180, 255, 0.42) 0%,
-      rgba(200, 180, 255, 0.16) 27%,
-      transparent 55%
-    ),
-    radial-gradient(
-      circle at 50% 80%,
-      rgba(235, 205, 255, 0.35) 0%,
-      transparent 52%
-    );
-
-  filter: blur(35px);
-
-  animation: glowstone-visible-gradient 18s ease-in-out infinite alternate !important;
-}
-
-.glowstone-hero-light::after {
-  display: none !important;
-}
-
-@keyframes glowstone-visible-gradient {
-  0% {
-    transform: translate(-8%, -4%) scale(1);
-  }
-
-  50% {
-    transform: translate(7%, 5%) scale(1.08);
-  }
-
-  100% {
-    transform: translate(-4%, 3%) scale(1.04);
-  }
-}
-
-.glowstone-laptop {
-  position: relative !important;
-  z-index: 10 !important;
-}
-
-.glowstone-tools {
-  position: relative !important;
-  z-index: 10 !important;
-}
-
-.glowstone-tools-label {
-  position: relative !important;
-  z-index: 10 !important;
-}
-
-.glowstone-tools-track {
-  position: relative !important;
-  z-index: 10 !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .glowstone-hero-light {
-    animation: none !important;
-  }
-}
-
-
-/* ============================================================
-   FINAL VISIBILITY OVERRIDE
-   ============================================================ */
-
-.glowstone-hero-light {
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 0 !important;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  pointer-events: none !important;
-}
-
-.glowstone-laptop {
-  position: relative !important;
-  z-index: 20 !important;
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-.glowstone-screen {
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-.glowstone-screen-content {
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-.glowstone-screen-video {
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-.glowstone-keyboard {
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-.glowstone-tools {
-  position: relative !important;
-  z-index: 30 !important;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-.glowstone-tools-label {
-  position: relative !important;
-  z-index: 30 !important;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-.glowstone-tools-track {
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-nav {
-  z-index: 99999 !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-
-/* ============================================================
-   FINAL HERO FORCE
-   ============================================================ */
-
-.glowstone-hero-light {
-  position: absolute !important;
-  inset: -20% !important;
-  z-index: 0 !important;
-  pointer-events: none !important;
-  display: block !important;
-  opacity: 1 !important;
-
-  background:
-    radial-gradient(
-      ellipse at 25% 35%,
-      rgba(255, 190, 220, 0.55) 0%,
-      rgba(255, 190, 220, 0.20) 28%,
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse at 75% 35%,
-      rgba(205, 185, 255, 0.55) 0%,
-      rgba(205, 185, 255, 0.20) 28%,
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse at 50% 80%,
-      rgba(235, 210, 255, 0.40) 0%,
-      transparent 55%
-    );
-
-  filter: blur(45px);
-
-  animation: glowstone-hero-light-move 18s ease-in-out infinite alternate;
-}
-
-@keyframes glowstone-hero-light-move {
-  0% {
-    transform: translate3d(-5%, -3%, 0) scale(1);
-  }
-
-  50% {
-    transform: translate3d(5%, 4%, 0) scale(1.08);
-  }
-
-  100% {
-    transform: translate3d(-3%, 2%, 0) scale(1.04);
-  }
-}
-
-.glowstone-laptop {
-  position: relative !important;
-  z-index: 20 !important;
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-.glowstone-screen {
-  visibility: visible !important;
-  opacity: 1 !important;
-
-  animation-name: glowstone-laptop-open-final !important;
-  animation-duration: 2.8s !important;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
-  animation-iteration-count: 1 !important;
-  animation-direction: normal !important;
-  animation-fill-mode: forwards !important;
-}
-
-@keyframes glowstone-laptop-open-final {
-  from {
-    transform: perspective(1900px) rotateX(-88.5deg);
-  }
-
-  to {
-    transform: perspective(1900px) rotateX(0deg);
-  }
-}
-
-.glowstone-screen-content,
-.glowstone-screen-video,
-.glowstone-keyboard {
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-.glowstone-tools,
-.glowstone-tools-label {
-  position: relative !important;
-  z-index: 30 !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-.glowstone-tools-track {
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .glowstone-hero-light {
-    animation: none !important;
-  }
-
-  .glowstone-screen {
-    animation: none !important;
-    transform: perspective(1900px) rotateX(0deg) !important;
-  }
-}
-
-
-/* ============================================================
-   FINAL CLEAN HERO — LARGE MACBOOK ONLY
-   ============================================================ */
-
-.glowstone-laptop {
-  --laptop-scale: min(1.85, 94vw / 620);
-
-  transform: scale(var(--laptop-scale)) !important;
-  transform-origin: center center;
-
-  position: relative !important;
-  z-index: 20 !important;
-}
-
-.glowstone-screen {
-  animation-name: glowstone-laptop-open-final !important;
-  animation-duration: 2.8s !important;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
-  animation-iteration-count: 1 !important;
-  animation-direction: normal !important;
-  animation-fill-mode: forwards !important;
-}
-
-@keyframes glowstone-laptop-open-final {
-  from {
-    transform: perspective(1900px) rotateX(-88.5deg);
-  }
-
-  to {
-    transform: perspective(1900px) rotateX(0deg);
-  }
-}
-
-@media (min-width: 1400px) {
-  .glowstone-laptop {
-    --laptop-scale: 1.85;
-  }
-}
-
-@media (max-width: 700px) {
-  .glowstone-laptop {
-    --laptop-scale: 0.68;
-  }
-}
-
-
-/* FINAL — REALLY LARGE MACBOOK */
-
-.glowstone-clean-laptop {
-  transform: scale(2.35) !important;
-}
-
-@media (min-width: 1600px) {
-  .glowstone-clean-laptop {
-    transform: scale(2.65) !important;
-  }
-}
-
-@media (max-width: 1200px) {
-  .glowstone-clean-laptop {
-    transform: scale(2.05) !important;
-  }
-}
-
-@media (max-width: 700px) {
-  .glowstone-clean-laptop {
-    transform: scale(0.85) !important;
-  }
-}
-
-
-/* FINAL HERO SPACING / MARGIN FIX */
-
-.glowstone-clean-hero {
-  position: relative !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  min-height: 100vh !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-
-  overflow: hidden !important;
-}
-
-.glowstone-clean-laptop {
-  position: absolute !important;
-
-  top: 50% !important;
-  left: 50% !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  width: 620px !important;
-  height: 370px !important;
-
-  transform:
-    translate(-50%, -50%)
-    scale(min(2.65, 92vw / 620)) !important;
-
-  transform-origin: center center !important;
-}
-
-@media (min-width: 1400px) {
-  .glowstone-clean-laptop {
-    transform:
-      translate(-50%, -50%)
-      scale(2.45) !important;
-  }
-}
-
-@media (max-width: 1100px) {
-  .glowstone-clean-laptop {
-    transform:
-      translate(-50%, -50%)
-      scale(1.8) !important;
-  }
-}
-
-@media (max-width: 700px) {
-  .glowstone-clean-laptop {
-    transform:
-      translate(-50%, -50%)
-      scale(0.9) !important;
-  }
-}
-
