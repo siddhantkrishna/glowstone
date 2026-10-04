@@ -27,7 +27,7 @@ export default function Footer() {
 
             <div className="glowstone-footer-column">
               <span className="glowstone-footer-label">Connect</span>
-              <a href="#contact">Contact</a>
+              <a href="#/contact">Contact</a>
               <a href="mailto:hello@glowstone.studio">Email</a>
               <a href="#">Instagram</a>
               <a href="#">LinkedIn</a>

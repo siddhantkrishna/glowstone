@@ -1,56 +1,118 @@
-import { useSearchParams } from "react-router-dom";
-import { STUDIO } from "@/data/content";
-import { useSeo } from "@/lib/seo";
-import { useMumbaiTime } from "@/lib/hooks";
-import ContactForm from "@/components/ContactForm";
-import { ArrowLink, MaskLines, Reveal } from "@/components/ui";
+import { FormEvent, useState } from "react";
+
+const services = [
+  "Branding & Identity",
+  "Website",
+  "Web Application",
+  "Mobile / Desktop App",
+  "Game / Interactive Experience",
+  "Social Media",
+  "Creative / Design",
+  "Something else",
+];
 
 export default function Contact() {
-  useSeo({
-    title: "Contact — Start a Project — Glowstone",
-    description: "Tell Glowstone what you're building. Brands, websites, web apps, apps, games, social and creative. Mumbai, India — hello@glowstone.studio.",
-    path: "/contact",
-    jsonLd: { "@type": "ContactPage", name: "Contact Glowstone", email: STUDIO.email },
-  });
-  const [params] = useSearchParams();
-  const time = useMumbaiTime();
+  const [sent, setSent] = useState(false);
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSent(true);
+  }
 
   return (
-    <div className="bg-black text-white -mb-px">
-      <section className="wrap pt-32 md:pt-44 pb-16 md:pb-28">
-        <p className="t-label text-white/50 flex justify-between mb-10 md:mb-16">
-          <span>(Contact) — Start a project</span>
-          <span className="t-num">{time} IST</span>
-        </p>
-        <MaskLines
-          as="h1"
-          lines={["Let's build", "something", <>worth remembering<span className="text-amber">.</span></>]}
-          className="t-display uppercase"
-          delay={0.1}
-        />
-        <div className="g mt-14 md:mt-20 gap-y-10">
-          <Reveal className="col-span-4 md:col-span-4 lg:col-span-5 t-lead text-white/75" delay={0.35}>
-            A few questions, so the first conversation can be a useful one. Prefer email? That works too.
-          </Reveal>
-          <Reveal className="col-span-4 md:col-span-4 lg:col-span-4 lg:col-start-9 grid grid-cols-2 gap-6" delay={0.45}>
-            <div>
-              <p className="t-label text-white/45 mb-2">Studio</p>
-              <p className="t-small">
-                {STUDIO.city}, {STUDIO.country}
-              </p>
-            </div>
-            <div>
-              <p className="t-label text-white/45 mb-2">Email</p>
-              <ArrowLink href={`mailto:${STUDIO.email}`} className="t-small">
-                {STUDIO.email}
-              </ArrowLink>
-            </div>
-          </Reveal>
+    <main className="glowstone-contact-page">
+      <section className="glowstone-contact-section">
+        <div className="glowstone-contact-header">
+          <span>Contact us</span>
+          <h1>Let’s make<br />something great.</h1>
+          <p>
+            Tell us what you’re building, what you need, or simply
+            what you have in mind.
+          </p>
         </div>
+
+        <form className="glowstone-contact-form" onSubmit={handleSubmit}>
+          <div className="glowstone-form-row">
+            <label>
+              First name
+              <input
+                name="firstName"
+                type="text"
+                placeholder="Your first name"
+                required
+              />
+            </label>
+
+            <label>
+              Last name
+              <input
+                name="lastName"
+                type="text"
+                placeholder="Your last name"
+                required
+              />
+            </label>
+          </div>
+
+          <label>
+            Work email
+            <input
+              name="email"
+              type="email"
+              placeholder="you@company.com"
+              required
+            />
+          </label>
+
+          <label>
+            Phone number
+            <div className="glowstone-phone">
+              <span>+91</span>
+              <input
+                name="phone"
+                type="tel"
+                placeholder="98765 43210"
+              />
+            </div>
+          </label>
+
+          <label>
+            What can we help you with?
+            <select name="service" required defaultValue="">
+              <option value="" disabled>
+                Select a service
+              </option>
+              {services.map((service) => (
+                <option key={service} value={service}>
+                  {service}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label>
+            Tell us about your project
+            <textarea
+              name="message"
+              rows={6}
+              placeholder="A little about your project, goals, timeline..."
+              required
+            />
+          </label>
+
+          <label className="glowstone-checkbox">
+            <input type="checkbox" required />
+            <span>
+              I agree to Glowstone contacting me about this enquiry.
+            </span>
+          </label>
+
+          <button type="submit" className="glowstone-submit">
+            <span>{sent ? "Message sent" : "Send enquiry"}</span>
+            <span>↗</span>
+          </button>
+        </form>
       </section>
-      <section className="wrap pb-20" aria-label="Project enquiry form">
-        <ContactForm initialType={params.get("type") ?? undefined} />
-      </section>
-    </div>
+    </main>
   );
 }
