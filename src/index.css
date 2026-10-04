@@ -1216,3 +1216,444 @@ video {
 
 }
 
+
+/* ============================================================
+   GLOWSTONE TOOLS RIBBON — LARGE / COLOURED
+   ============================================================ */
+
+.glowstone-tools {
+  width: min(760px, 88vw);
+  max-width: 760px;
+
+  margin: 0 auto;
+
+  overflow: hidden;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.13);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.glowstone-tools-label {
+  margin-bottom: 20px;
+
+  font-size: 10px;
+  letter-spacing: 0.34em;
+
+  color: rgba(10, 10, 10, 0.42);
+}
+
+.glowstone-tools-track {
+  display: flex;
+  align-items: center;
+
+  width: max-content;
+
+  gap: 46px;
+
+  padding: 18px 34px;
+
+  animation:
+    glowstone-tools-scroll
+    24s
+    linear
+    infinite;
+
+  will-change: transform;
+}
+
+.glowstone-tool {
+  flex: 0 0 auto;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 11px;
+
+  white-space: nowrap;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  letter-spacing: -0.01em;
+
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.glowstone-tool-mark {
+  width: 28px;
+  height: 28px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 28px;
+
+  border: 1px solid currentColor;
+
+  border-radius: 50%;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  background: rgba(255, 255, 255, 0.72);
+
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+
+/* Claude / Anthropic */
+
+.glowstone-tool-claude {
+  color: #d97757;
+}
+
+.glowstone-tool-claude .glowstone-tool-mark {
+  background: rgba(217, 119, 87, 0.10);
+}
+
+
+/* Vercel */
+
+.glowstone-tool-vercel {
+  color: #111111;
+}
+
+.glowstone-tool-vercel .glowstone-tool-mark {
+  background: #111111;
+  color: #ffffff;
+  border-color: #111111;
+}
+
+
+/* Framer */
+
+.glowstone-tool-framer {
+  color: #8b5cf6;
+}
+
+.glowstone-tool-framer .glowstone-tool-mark {
+  background: rgba(139, 92, 246, 0.10);
+}
+
+
+/* Lovable */
+
+.glowstone-tool-lovable {
+  color: #e11d8d;
+}
+
+.glowstone-tool-lovable .glowstone-tool-mark {
+  background: rgba(225, 29, 141, 0.10);
+}
+
+
+/* Supabase */
+
+.glowstone-tool-supabase {
+  color: #3ecf8e;
+}
+
+.glowstone-tool-supabase .glowstone-tool-mark {
+  background: rgba(62, 207, 142, 0.11);
+}
+
+
+/* Cursor */
+
+.glowstone-tool-cursor {
+  color: #555555;
+}
+
+.glowstone-tool-cursor .glowstone-tool-mark {
+  background: rgba(85, 85, 85, 0.08);
+}
+
+
+/* OpenAI */
+
+.glowstone-tool-openai {
+  color: #111111;
+}
+
+.glowstone-tool-openai .glowstone-tool-mark {
+  background: rgba(16, 163, 127, 0.12);
+  border-color: #10a37f;
+}
+
+
+/* Google */
+
+.glowstone-tool-google {
+  color: #4285f4;
+}
+
+.glowstone-tool-google .glowstone-tool-mark {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(66, 133, 244, 0.12),
+      rgba(52, 168, 83, 0.12)
+    );
+}
+
+
+/* Antigravity */
+
+.glowstone-tool-antigravity {
+  color: #6d5dfc;
+}
+
+.glowstone-tool-antigravity .glowstone-tool-mark {
+  background: rgba(109, 93, 252, 0.10);
+}
+
+
+/* Side fades */
+
+.glowstone-tools::before,
+.glowstone-tools::after {
+  width: 80px;
+}
+
+.glowstone-tools::before {
+  background:
+    linear-gradient(
+      to right,
+      #f5f4f1,
+      rgba(245, 244, 241, 0)
+    );
+}
+
+.glowstone-tools::after {
+  background:
+    linear-gradient(
+      to left,
+      #f5f4f1,
+      rgba(245, 244, 241, 0)
+    );
+}
+
+
+/* Hover */
+
+.glowstone-tool:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.glowstone-tool:hover .glowstone-tool-mark {
+  transform: scale(1.08);
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+  .glowstone-tools {
+    width: 88vw;
+  }
+
+  .glowstone-tools-track {
+    gap: 30px;
+    padding: 15px 26px;
+  }
+
+  .glowstone-tool {
+    font-size: 11px;
+  }
+
+  .glowstone-tool-mark {
+    width: 24px;
+    height: 24px;
+    flex-basis: 24px;
+  }
+
+}
+
+
+/* ============================================================
+   GLOWSTONE — MOVING BABY PINK / PURPLE HERO LIGHT
+   ============================================================ */
+
+.glowstone-hero-light {
+  position: absolute;
+  inset: -20% -15%;
+
+  z-index: -1;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 20% 35%,
+      rgba(255, 214, 232, 0.72) 0%,
+      rgba(255, 214, 232, 0.32) 22%,
+      transparent 52%
+    ),
+    radial-gradient(
+      ellipse at 78% 30%,
+      rgba(220, 205, 255, 0.68) 0%,
+      rgba(220, 205, 255, 0.30) 24%,
+      transparent 54%
+    ),
+    radial-gradient(
+      ellipse at 52% 78%,
+      rgba(239, 218, 255, 0.58) 0%,
+      rgba(239, 218, 255, 0.24) 25%,
+      transparent 55%
+    );
+
+  filter: blur(45px);
+
+  transform: translate3d(0, 0, 0);
+
+  animation: glowstone-hero-gradient 18s ease-in-out infinite alternate;
+
+  will-change: transform;
+}
+
+
+@keyframes glowstone-hero-gradient {
+
+  0% {
+    transform:
+      translate3d(-5%, -2%, 0)
+      scale(1);
+  }
+
+  25% {
+    transform:
+      translate3d(3%, 4%, 0)
+      scale(1.06);
+  }
+
+  50% {
+    transform:
+      translate3d(7%, -3%, 0)
+      scale(1.1);
+  }
+
+  75% {
+    transform:
+      translate3d(-3%, 5%, 0)
+      scale(1.05);
+  }
+
+  100% {
+    transform:
+      translate3d(-7%, -4%, 0)
+      scale(1);
+  }
+
+}
+
+
+/* Soft white veil keeps the gradient premium and subtle */
+
+.glowstone-hero-light::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.18),
+      rgba(255, 255, 255, 0.72) 72%
+    );
+
+  pointer-events: none;
+}
+
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .glowstone-hero-light {
+    animation: none;
+  }
+}
+
+
+.glowstone-hero-light {
+  position: absolute;
+  inset: -25% -15%;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 20% 35%,
+      rgba(255, 214, 232, 0.72) 0%,
+      rgba(255, 214, 232, 0.30) 25%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 78% 30%,
+      rgba(220, 205, 255, 0.68) 0%,
+      rgba(220, 205, 255, 0.28) 25%,
+      transparent 56%
+    ),
+    radial-gradient(
+      ellipse at 52% 78%,
+      rgba(239, 218, 255, 0.58) 0%,
+      rgba(239, 218, 255, 0.22) 25%,
+      transparent 56%
+    );
+
+  filter: blur(50px);
+  animation: glowstone-hero-gradient 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes glowstone-hero-gradient {
+  0% {
+    transform: translate3d(-5%, -2%, 0) scale(1);
+  }
+
+  25% {
+    transform: translate3d(3%, 4%, 0) scale(1.06);
+  }
+
+  50% {
+    transform: translate3d(7%, -3%, 0) scale(1.1);
+  }
+
+  75% {
+    transform: translate3d(-3%, 5%, 0) scale(1.05);
+  }
+
+  100% {
+    transform: translate3d(-7%, -4%, 0) scale(1);
+  }
+}
+
+.glowstone-hero-light::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.10),
+      rgba(255, 255, 255, 0.70) 75%
+    );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glowstone-hero-light {
+    animation: none;
+  }
+}
+

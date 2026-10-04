@@ -1,13 +1,13 @@
 const tools = [
-  "Claude Code",
-  "Vercel",
-  "Framer",
-  "Lovable",
-  "Supabase",
-  "Cursor",
-  "OpenAI",
-  "Google",
-  "Antigravity",
+  { name: "Claude Code", color: "claude" },
+  { name: "Vercel", color: "vercel" },
+  { name: "Framer", color: "framer" },
+  { name: "Lovable", color: "lovable" },
+  { name: "Supabase", color: "supabase" },
+  { name: "Cursor", color: "cursor" },
+  { name: "OpenAI", color: "openai" },
+  { name: "Google", color: "google" },
+  { name: "Antigravity", color: "antigravity" },
 ];
 
 export default function Home() {
