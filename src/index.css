@@ -1229,3 +1229,16 @@ body {
     font-size: 16px;
   }
 }
+
+
+.glowstone-footer-logo {
+  display: block !important;
+  width: min(440px, 42vw) !important;
+  height: auto !important;
+  max-height: 180px !important;
+  object-fit: contain !important;
+  object-position: left center !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  mix-blend-mode: normal !important;
+}
