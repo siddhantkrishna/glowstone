@@ -715,3 +715,155 @@ body {
     font-size: 17px;
   }
 }
+
+
+/* ============================================================
+   FLOATING CIRCULAR NAVIGATION
+   ============================================================ */
+
+.glowstone-nav {
+  position: fixed;
+
+  top: 24px;
+  left: 50%;
+
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 7px;
+
+  transform: translateX(-50%);
+
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.78);
+
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.08);
+
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+
+  transition:
+    box-shadow .3s ease,
+    background .3s ease;
+}
+
+.glowstone-nav:hover {
+  background: rgba(255, 255, 255, 0.92);
+
+  box-shadow:
+    0 14px 45px rgba(0, 0, 0, 0.11);
+}
+
+.glowstone-nav-logo {
+  width: 42px;
+  height: 42px;
+
+  flex: 0 0 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  background: #080808;
+
+  transition:
+    transform .3s cubic-bezier(.16,1,.3,1);
+}
+
+.glowstone-nav-logo:hover {
+  transform: rotate(-8deg) scale(1.06);
+}
+
+.glowstone-nav-logo img {
+  width: 28px;
+  height: 28px;
+
+  display: block;
+
+  object-fit: contain;
+}
+
+.glowstone-nav-links {
+  display: flex;
+  align-items: center;
+
+  gap: 2px;
+
+  padding: 0 5px;
+}
+
+.glowstone-nav-links a {
+  display: flex;
+  align-items: center;
+
+  height: 38px;
+
+  padding: 0 15px;
+
+  border-radius: 999px;
+
+  color: #171717;
+
+  text-decoration: none;
+
+  font-family:
+    Inter,
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  letter-spacing: -0.015em;
+
+  transition:
+    color .2s ease,
+    background .2s ease;
+}
+
+.glowstone-nav-links a:hover {
+  color: #5b3fd6;
+
+  background: rgba(91, 63, 214, 0.07);
+}
+
+@media (max-width: 700px) {
+  .glowstone-nav {
+    top: 14px;
+
+    max-width: calc(100vw - 28px);
+
+    padding: 6px;
+  }
+
+  .glowstone-nav-logo {
+    width: 40px;
+    height: 40px;
+
+    flex-basis: 40px;
+  }
+
+  .glowstone-nav-links {
+    gap: 0;
+  }
+
+  .glowstone-nav-links a {
+    height: 36px;
+
+    padding: 0 9px;
+
+    font-size: 12px;
+  }
+}
