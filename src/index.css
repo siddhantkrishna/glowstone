@@ -1990,3 +1990,65 @@ nav {
   }
 }
 
+
+/* FINAL HERO SPACING / MARGIN FIX */
+
+.glowstone-clean-hero {
+  position: relative !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  overflow: hidden !important;
+}
+
+.glowstone-clean-laptop {
+  position: absolute !important;
+
+  top: 50% !important;
+  left: 50% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  width: 620px !important;
+  height: 370px !important;
+
+  transform:
+    translate(-50%, -50%)
+    scale(min(2.65, 92vw / 620)) !important;
+
+  transform-origin: center center !important;
+}
+
+@media (min-width: 1400px) {
+  .glowstone-clean-laptop {
+    transform:
+      translate(-50%, -50%)
+      scale(2.45) !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  .glowstone-clean-laptop {
+    transform:
+      translate(-50%, -50%)
+      scale(1.8) !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .glowstone-clean-laptop {
+    transform:
+      translate(-50%, -50%)
+      scale(0.9) !important;
+  }
+}
+
