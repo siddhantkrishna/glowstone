@@ -21,6 +21,11 @@ export default function Home() {
 
           <div className="glowstone-keyboard" />
         </div>
+
+        <a href="#contact" className="glowstone-contact-button">
+          <span>Contact us</span>
+          <span className="glowstone-contact-arrow">↗</span>
+        </a>
       </section>
     </main>
   );
