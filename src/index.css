@@ -1807,3 +1807,115 @@ nav {
   opacity: 1 !important;
 }
 
+
+/* ============================================================
+   FINAL HERO FORCE
+   ============================================================ */
+
+.glowstone-hero-light {
+  position: absolute !important;
+  inset: -20% !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  display: block !important;
+  opacity: 1 !important;
+
+  background:
+    radial-gradient(
+      ellipse at 25% 35%,
+      rgba(255, 190, 220, 0.55) 0%,
+      rgba(255, 190, 220, 0.20) 28%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 75% 35%,
+      rgba(205, 185, 255, 0.55) 0%,
+      rgba(205, 185, 255, 0.20) 28%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 50% 80%,
+      rgba(235, 210, 255, 0.40) 0%,
+      transparent 55%
+    );
+
+  filter: blur(45px);
+
+  animation: glowstone-hero-light-move 18s ease-in-out infinite alternate;
+}
+
+@keyframes glowstone-hero-light-move {
+  0% {
+    transform: translate3d(-5%, -3%, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(5%, 4%, 0) scale(1.08);
+  }
+
+  100% {
+    transform: translate3d(-3%, 2%, 0) scale(1.04);
+  }
+}
+
+.glowstone-laptop {
+  position: relative !important;
+  z-index: 20 !important;
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.glowstone-screen {
+  visibility: visible !important;
+  opacity: 1 !important;
+
+  animation-name: glowstone-laptop-open-final !important;
+  animation-duration: 2.8s !important;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+  animation-iteration-count: 1 !important;
+  animation-direction: normal !important;
+  animation-fill-mode: forwards !important;
+}
+
+@keyframes glowstone-laptop-open-final {
+  from {
+    transform: perspective(1900px) rotateX(-88.5deg);
+  }
+
+  to {
+    transform: perspective(1900px) rotateX(0deg);
+  }
+}
+
+.glowstone-screen-content,
+.glowstone-screen-video,
+.glowstone-keyboard {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.glowstone-tools,
+.glowstone-tools-label {
+  position: relative !important;
+  z-index: 30 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.glowstone-tools-track {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glowstone-hero-light {
+    animation: none !important;
+  }
+
+  .glowstone-screen {
+    animation: none !important;
+    transform: perspective(1900px) rotateX(0deg) !important;
+  }
+}
+
