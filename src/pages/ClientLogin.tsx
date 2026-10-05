@@ -77,9 +77,18 @@ export default function ClientLogin() {
         );
       }
 
+      const authenticatedProjectId =
+        data.project?.projectId;
+
+      if (!authenticatedProjectId) {
+        throw new Error(
+          "Login succeeded, but the project information was missing.",
+        );
+      }
+
       navigate(
         `/client/${encodeURIComponent(
-          data.project.projectId,
+          authenticatedProjectId,
         )}`,
       );
     } catch (err) {
