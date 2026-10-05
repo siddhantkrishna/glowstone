@@ -3,59 +3,70 @@ import type {
   VercelResponse,
 } from "@vercel/node";
 import { neon } from "@neondatabase/serverless";
+
 import {
   createSessionToken,
-  hashPassword,
   hashSessionToken,
   normalizeProjectId,
   setSessionCookie,
   verifyPassword,
 } from "../../src/server/clientAuth";
 
-function getSql() {
-  if (!process.env.DATABASE_URL) {
-    throw new Error("DATABASE_URL is not configured.");
-  }
+function json(
+  res: VercelResponse,
+  status: number,
+  body: unknown,
+) {
+  res.setHeader(
+    "Content-Type",
+    "application/json; charset=utf-8",
+  );
 
-  return neon(process.env.DATABASE_URL);
+  return res.status(status).json(body);
 }
 
 export default async function handler(
   req: VercelRequest,
   res: VercelResponse,
 ) {
-  if (req.method !== "POST") {
-    return res.status(405).json({
-      error: "Method not allowed.",
-    });
-  }
-
   try {
+    if (req.method !== "POST") {
+      return json(res, 405, {
+        error: "Method not allowed.",
+      });
+    }
+
+    if (!process.env.DATABASE_URL) {
+      return json(res, 500, {
+        error:
+          "Glowstone database is not configured on the server.",
+      });
+    }
+
     const body =
       typeof req.body === "string"
         ? JSON.parse(req.body)
         : req.body ?? {};
 
-    const projectId = normalizeProjectId(
-      String(body.projectId ?? ""),
-    );
+    const projectId =
+      normalizeProjectId(
+        String(body.projectId ?? ""),
+      );
 
     const password = String(
       body.password ?? "",
     );
 
     if (!projectId || !password) {
-      return res.status(400).json({
-        error: "Project ID and password are required.",
+      return json(res, 400, {
+        error:
+          "Project ID and password are required.",
       });
     }
 
-    const sql = getSql();
-
-    await sql`
-      DELETE FROM glowstone_client_sessions
-      WHERE expires_at <= NOW()
-    `;
+    const sql = neon(
+      process.env.DATABASE_URL,
+    );
 
     const rows = await sql`
       SELECT
@@ -69,34 +80,40 @@ export default async function handler(
         progress::int AS progress,
         status
       FROM glowstone_projects
-      WHERE project_id = ${projectId}
+      WHERE UPPER(project_id) = ${projectId}
       LIMIT 1
     `;
 
     const project = rows[0];
 
     if (!project) {
-      return res.status(401).json({
-        error: "Invalid project ID or password.",
+      return json(res, 401, {
+        error:
+          "Invalid project ID or password.",
       });
     }
 
-    const valid = verifyPassword(
-      password,
-      String(project.password_salt),
-      String(project.password_hash),
-    );
+    const valid =
+      verifyPassword(
+        password,
+        String(project.password_salt),
+        String(project.password_hash),
+      );
 
     if (!valid) {
-      return res.status(401).json({
-        error: "Invalid project ID or password.",
+      return json(res, 401, {
+        error:
+          "Invalid project ID or password.",
       });
     }
 
-    const sessionToken = createSessionToken();
-    const tokenHash = hashSessionToken(
-      sessionToken,
-    );
+    const sessionToken =
+      createSessionToken();
+
+    const tokenHash =
+      hashSessionToken(
+        sessionToken,
+      );
 
     await sql`
       INSERT INTO glowstone_client_sessions (
@@ -106,7 +123,7 @@ export default async function handler(
       )
       VALUES (
         ${tokenHash},
-        ${projectId},
+        ${String(project.project_id)},
         NOW() + INTERVAL '7 days'
       )
     `;
@@ -116,22 +133,42 @@ export default async function handler(
       sessionToken,
     );
 
-    return res.status(200).json({
+    return json(res, 200, {
       project: {
-        projectId,
-        clientName: String(project.client_name),
-        projectName: String(project.project_name),
-        projectFee: Number(project.project_fee),
-        amountPaid: Number(project.amount_paid),
-        progress: Number(project.progress),
-        status: String(project.status),
+        projectId: String(
+          project.project_id,
+        ),
+        clientName: String(
+          project.client_name,
+        ),
+        projectName: String(
+          project.project_name,
+        ),
+        projectFee: Number(
+          project.project_fee,
+        ),
+        amountPaid: Number(
+          project.amount_paid,
+        ),
+        progress: Number(
+          project.progress,
+        ),
+        status: String(
+          project.status,
+        ),
       },
     });
   } catch (error) {
-    console.error(error);
+    console.error(
+      "CLIENT LOGIN ERROR:",
+      error,
+    );
 
-    return res.status(500).json({
-      error: "Unable to sign in right now.",
+    return json(res, 500, {
+      error:
+        error instanceof Error
+          ? error.message
+          : "Glowstone server error.",
     });
   }
 }

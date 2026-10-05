@@ -49,13 +49,31 @@ export default function ClientLogin() {
         },
       );
 
-      const data =
-        await response.json();
+      const raw = await response.text();
+
+      let data: {
+        error?: string;
+        project?: {
+          projectId?: string;
+        };
+      } = {};
+
+      try {
+        data = raw
+          ? JSON.parse(raw)
+          : {};
+      } catch {
+        data = {
+          error:
+            raw ||
+            `Server returned HTTP ${response.status}.`,
+        };
+      }
 
       if (!response.ok) {
         throw new Error(
           data.error ||
-            "Unable to sign in.",
+            `Server returned HTTP ${response.status}.`,
         );
       }
 
