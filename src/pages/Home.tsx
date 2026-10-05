@@ -22,10 +22,17 @@ export default function Home() {
           <div className="glowstone-keyboard" />
         </div>
 
-        <a href="#/contact" className="glowstone-contact-button">
-          <span>Contact us</span>
-          <span className="glowstone-contact-arrow">↗</span>
-        </a>
+        <div className="glowstone-hero-actions">
+          <a href="#/contact" className="glowstone-contact-button">
+            <span>Contact us</span>
+            <span className="glowstone-contact-arrow">↗</span>
+          </a>
+
+          <a href="#/invoice" className="glowstone-invoice-button">
+            <span>Get invoice</span>
+            <span className="glowstone-invoice-arrow">↗</span>
+          </a>
+        </div>
       </section>
     </main>
   );
