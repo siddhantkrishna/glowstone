@@ -12,17 +12,27 @@ import {
   verifyPassword,
 } from "../../src/server/clientAuth";
 
-function json(
+export const runtime = "nodejs";
+
+function send(
   res: VercelResponse,
   status: number,
-  body: unknown,
+  body: Record<string, unknown>,
 ) {
+  res.status(status);
   res.setHeader(
     "Content-Type",
     "application/json; charset=utf-8",
   );
+  res.end(JSON.stringify(body));
+}
 
-  return res.status(status).json(body);
+function safeError(error: unknown) {
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  return String(error);
 }
 
 export default async function handler(
@@ -31,22 +41,41 @@ export default async function handler(
 ) {
   try {
     if (req.method !== "POST") {
-      return json(res, 405, {
+      return send(res, 405, {
         error: "Method not allowed.",
       });
     }
 
-    if (!process.env.DATABASE_URL) {
-      return json(res, 500, {
+    const databaseUrl =
+      process.env.DATABASE_URL;
+
+    if (!databaseUrl) {
+      console.error(
+        "LOGIN: DATABASE_URL missing",
+      );
+
+      return send(res, 500, {
         error:
-          "Glowstone database is not configured on the server.",
+          "Database configuration is missing on the production server.",
       });
     }
 
-    const body =
-      typeof req.body === "string"
-        ? JSON.parse(req.body)
-        : req.body ?? {};
+    let body: Record<
+      string,
+      unknown
+    > = {};
+
+    try {
+      body =
+        typeof req.body === "string"
+          ? JSON.parse(req.body)
+          : (req.body ?? {});
+    } catch {
+      return send(res, 400, {
+        error:
+          "Invalid request body.",
+      });
+    }
 
     const projectId =
       normalizeProjectId(
@@ -58,14 +87,14 @@ export default async function handler(
     );
 
     if (!projectId || !password) {
-      return json(res, 400, {
+      return send(res, 400, {
         error:
           "Project ID and password are required.",
       });
     }
 
     const sql = neon(
-      process.env.DATABASE_URL,
+      databaseUrl,
     );
 
     const rows = await sql`
@@ -87,7 +116,7 @@ export default async function handler(
     const project = rows[0];
 
     if (!project) {
-      return json(res, 401, {
+      return send(res, 401, {
         error:
           "Invalid project ID or password.",
       });
@@ -101,7 +130,7 @@ export default async function handler(
       );
 
     if (!valid) {
-      return json(res, 401, {
+      return send(res, 401, {
         error:
           "Invalid project ID or password.",
       });
@@ -133,7 +162,7 @@ export default async function handler(
       sessionToken,
     );
 
-    return json(res, 200, {
+    return send(res, 200, {
       project: {
         projectId: String(
           project.project_id,
@@ -160,15 +189,13 @@ export default async function handler(
     });
   } catch (error) {
     console.error(
-      "CLIENT LOGIN ERROR:",
+      "LOGIN FUNCTION ERROR:",
       error,
     );
 
-    return json(res, 500, {
+    return send(res, 500, {
       error:
-        error instanceof Error
-          ? error.message
-          : "Glowstone server error.",
+        `Server error: ${safeError(error)}`,
     });
   }
 }
